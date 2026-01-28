@@ -31,11 +31,23 @@ firstNum = 0
 secondNum = 0
 score = 0
 answer = ""
+chance = 3
+firstNum = random.randint(2, 100)
+secondNum = random.randint(2,100)
 
 while score != 15:
-    firstNum = random.randint(2, 100)
-    secondNum = random.randint(2,100)
-    answer = input(str(firstNum) + "x" + str(secondNum))
+    answer = input(str(firstNum) + "x" + str(secondNum) + " = ")
     if int(answer) == firstNum * secondNum:
         score += 1
+        firstNum = random.randint(2, 100)
+        secondNum = random.randint(2,100)
+    elif int(answer) != firstNum * secondNum:
+        chance -= 1
+        print("try again.")
+        print("oh yeah, reminder : you have " + str(chance) + " tries left haha...")
+    if chance == 0:
+        print("go to remedial lessons.")
+        break
     print("current score : " + str(score))
+if score == 15:
+    print("oh. good job.")
