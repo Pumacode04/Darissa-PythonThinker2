@@ -54,14 +54,12 @@ while food != "end":
 
 print(menu)
 #task 4b:
-custo = "hey what you like to eat."
+custo = input("hey what you like to eat.")
 for i in range(len(menu)):
-    custo = input("hey what you like to eat.")
+#    custo = input("hey what you like to eat.")
     if custo == menu[i]:
-        print("yes, we have that")
         stock += 1
-        break
-    else:
-        break
+if stock == 1:
+    print("yes, we have that")
 if stock == 0:
     print("go next door see")
