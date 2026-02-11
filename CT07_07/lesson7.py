@@ -1,2 +1,1 @@
-print("Hello from lesson 7")
-
+#print("Hello from lesson 7")

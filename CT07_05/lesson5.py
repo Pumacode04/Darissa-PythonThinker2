@@ -63,8 +63,10 @@
 #Task 5:
 import random
 pokemon1 = ""
+pokemonIndex1 = 0
 pokemonPower1 = 0
 pokemon2 = ""
+pokemonIndex2 = 0
 pokemonPower2 = 0
 winner = ""
 pokemons = [
@@ -79,15 +81,18 @@ powers = [
     55, 84, 49, 48, 45,
     45, 52, 55, 110, 110,
     85, 65, 134, 130, 110,
-    50, 125, 65, 110, 83
+    50, 125, 65, 110, 83 
 ]
 
 pokemon1 = random.choice(pokemons)
-pokemonPower1 = pokemon1(power.index)
+pokemonIndex1 = pokemon1.index(pokemon1)
+pokemonPower1 = powers[pokemonIndex1]
 
-while pokemon2 == pokemon1:
+pokemon2 = random.choice(pokemons)
+while pokemon1 == pokemon2:
     pokemon2 = random.choice(pokemons)
-pokemonPower2 = powers(pokemon2.index)
+pokemonIndex2 = pokemon2.index(pokemon2)
+pokemonPower2 = powers[pokemonIndex2]
 
 if pokemonPower1 < pokemonPower2:
     winner = pokemon2
@@ -95,3 +100,5 @@ else:
     winner = pokemon1
 
 print(f"{pokemon1} verus {pokemon2}. {winner} wins!")
+
+#powers[pokemonIndex1]
