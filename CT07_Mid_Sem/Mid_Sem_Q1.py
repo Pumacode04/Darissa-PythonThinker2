@@ -43,7 +43,7 @@ print(f"Hero starts on his adventure with Health: {health}")
 # - Increase battle counter
 # - Print updated health
 # ============================================================
-while health >= 0:
+while health > 0:
     health = health - damage
     print(f"After fighting monsters, his Health is now: {health}")
     damage = random.randint(1, 15)
