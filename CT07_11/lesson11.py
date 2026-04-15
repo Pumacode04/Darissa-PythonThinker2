@@ -1,4 +1,4 @@
-#print("Hello from lesson 11!")
+#print("Hello from lesson 11")
 import turtle
 import random
 
@@ -56,20 +56,31 @@ green_turtle.goto(-width / 4, -height / 2 + 100)
 green_turtle.seth(90)
 green_turtle.write("Turtle", align="center", font=("Arial", 15))
 
-#RACE STARTS NOW!
+#Enter your guess:
+guess = input("Guess: ")
 
+#RACE STARTS NOW!
 contestants = [Pink_square, Blue_triangle, green_turtle]
 race_end = False
 while not race_end:
-    for contestant in contestants:
-        contestant.pendown()
-        contestant.seth(random.randint(75, 155))
-        contestant.forward(random.randint(1, 20))
+    for i in range(len(contestants)):
+        contestants[i].pendown()
+        contestants[i].seth(random.randint(75, 115))
+        contestants[i].forward(random.randint(1, 20))
 
-        if contestant.ycor() > height / 2 - 100:
-            winner = contestant
+        if contestants[i].ycor() > height / 2 - 100:
+            if i == 0:
+                winner = "Pink_square"
+            elif i == 1:
+                winner = "Blue_triangle"
+            else:
+                winner = "green_turtle"
+            print(f"Winner: {winner}")
             race_end = True
 
-print(f"Winner: {winner}")
+if guess.lower == winner.lower():
+    print("Your guess is correct!")
+else:
+    print("Your guess is wrong!")
 
 turtle.done()
