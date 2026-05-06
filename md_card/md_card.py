@@ -14,7 +14,7 @@ STUDENT_NAME = "Darissa"
 image_file_name = f"{CLASS}_{DAY}_{TIME}_{STUDENT_NAME}_mothers_day_animation.mp4"
 
 message = "Happy Mother's Day"
-sub_message = "Thank you for thanking care of me."
+sub_message = "Thank you for caring for me"
 
 frames = []
 
