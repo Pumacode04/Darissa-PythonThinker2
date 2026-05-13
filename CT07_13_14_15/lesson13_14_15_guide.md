@@ -1,187 +1,178 @@
-# Lesson 14 - Recreate bouncing ball program using pygame
+# Lesson 13 - Tic Tac Toe Part 1/3
 
-## Task 1: Pygame window
-Create a pygame window with the following specifications:
-1. Window width: 800
-2. Window height: 600
-3. Window title: 'Pong Game'
-4. Window variable: 'screen'
+## Recap 1: diceGuess function
+Create a function named 'diceGuess' with in 1 parameter,
+'guess' (an integer between 1 and 6). The function returns True
+if the guess matches a randomly generated number between 1 and
+6, and False otherwise.
 
----------------------------------------------------------------
+1. Import 'random' library
+2. Define 'diceGuess' function with 1 parameter, 'guess'
+        a. Using '.randint()', create and assign the
+           'random_number' variable a random number between 1
+           and 6
+        b. Using 'return', return the boolean value of
+           'guess == random_number'
 
-## Task 2: Main loop
-Continuing from your code in Task 1, create a main loop to keep
-your window open.
+Usage example:
+if diceGuess(5):
+    print("Correct!")
+else:
+    print("Incorrect.")
 
-Your main loop must contain the following components:
-1. Handle events (e.g. closing the window)
-2. Update the window
-3. Quit pygame (upon exiting the loop)
+## Task 1: Setup Turtle
+Let’s start by setting up Turtle and creating a window.
 
----------------------------------------------------------------
+1. Import the turtle library
+2. Create a constant variable BOARD_SIZE and assign 800 to it, this will be the size of our window
+3. Create a function named setup_turtle
+4. Assign the screen and pen with .Screen() and .Turtle()
+5. Setup the screen’s width and height with BOARD_SIZE
+6. Set the pen size to 5 and .hideturtle()
+7. Call the setup_turtle function and .mainloop()
 
-## Task 3: Drawing player paddles
-**Task 3a: Drawing player 1's paddle**
-Using 'pygame.draw.rect(surface, color, (left, top, width,
-height))':
-1. Create a 20(w) x 100(h) white paddle for player 1
-2. The paddle must be 10 pixels away from the left border
-3. Centred vertically
+## Task 2: Draw Grid
+We will draw the grid by dividing the window into 3 rows and 3 columns.
 
-**Task 3b: Drawing player 2's paddle**
-Using 'pygame.draw.rect(surface, color, (left, top, width,
-height))':
-1. Create a 20(w) x 100(h) white paddle for player 2
-2. The paddle must be 10 pixels away from the right border
-3. Centred vertically
+1. Create a constant variable CELL_SIZE = BOARD_SIZE // 3
+2. Create a function named draw_grid
+3. Use the constant variables to set the pen’s position and draw the grid with a loop
 
----------------------------------------------------------------
+## Task 3: Draw X
+Refer to the slides
 
-## Task 4: Controlling player paddles
-**Task 4a: Controlling player 1's paddle**
-Using 'keys = pygame.key.get_pressed()' to get key presses:
-1. Move paddle 1 up by 1 pixel when 'w' key is pressed
-2. Move paddle 1 down by 1 pixel when 's' key is pressed
+## Task 4: Draw O
+Refer to the slides
 
-Ensure that your code does not allow for the paddle to move
-beyond the window.
+## Task 5: Draw Symbol
+We need a function to translate the row and column input into coordinates before drawing.
+- e.g. row 1, col 1 = (CELL_SIZE, CELL_SIZE)
 
-**Task 4b: Debugging (drawn object doesn't disappear)**
-1. Define the variable 'black' using the RGB value of (0, 0, 0).
-2. Fill the entire screen black before drawing the objects.
+We will add a ‘current_symbol’ variable to determine which symbol we are drawing (X or O).
 
-**Task 4c: Controlling player 2's paddle**
-1. Move paddle 2 up by 1 pixel when 'UP' key is pressed
-2. Move paddle 2 down by 1 pixel when 'DOWN' key is pressed
+Try calling the draw_symbol() function to draw the symbols.
 
-Ensure that your code does not allow for the paddle to move
-beyond the window.
+# Lesson 14 - Tic Tac Toe Part 2/3
 
----------------------------------------------------------------
+## Task 1: Initialize board
+Create an ‘initialize_board()’ function that returns a 3x3 Tic Tac Toe board using nested lists. Each item in each of the list holds a space (‘ ‘).
 
-## Task 5: Creating ball object
-Create a ball object with the following properties:
-1. Ball radius: 10
-2. Ball x-coordinate: centre of window
-3. Ball y-coordinate: centre of window
+Create an ‘initialize_board()’ function that does the following:
+1. Create an empty list, ‘board’
+2. Using ‘for’ loop to iterate 3 times,
+- Create an empty list, ‘row’
+- Using ‘for’ loop to iterate 3 times,
+- Using ‘.append()’, add a space (‘ ‘) into the list, ‘row’.
+- Append (‘.append()’) the list, ‘row’ into the list, ‘board’ to create a nested list.
+3. Return ‘board’
 
-Then in your main loop:
-1. Draw the ball object using the 'pygame.draw.circle()'
-   function.
+## Task 2: Get Player Move
+Create a function named get_player_move
 
----------------------------------------------------------------
+The function needs to take in 1 parameter, ‘board’
+This allows the function to access the nested list we created
 
-## Task 6: Moving the ball
-Initialise 2 variables that will determine the speed and
-direction the ball will move:
-1. ball_dx = 0.5
-2. ball_dy = 0.5
+Ask for 2 inputs
+1. row
+2. Col
 
-In your main loop:
-1. Update the ball position by changing 'ball_x' and 'ball_y'
-   by 'ball_dx' and 'ball_dy' respectively.
+Use row and col to access the board and set it to ‘X’ or ‘O’
+Call the function and print the updated board
 
----------------------------------------------------------------
+## Task 3a: Check Board Full
+1. Create a function named check_full
+- Check if all moves have been made (i.e. the list is full)
+2. The function needs to take in 1 parameter, ‘board’
+- This allows the function to access the nested list we created
+3. Loop through the nested list with a nested for loop
+4. Check if the list has any empty spaces (‘ ‘)
+5. Return true if there is, else return false
 
-## Task 7: Ball wall bounce
-**Task 7a: Y-direction**
-Using an 'if' statement:
-1. Check if the ball is above or below the window in the
-   y-direction
-2. If true, reverse the y-direction that the ball is moving
+## Task 3b: Check Board Full
+Call the check_full function in the main loop
 
-**Task 7b: X-direction**
-Using an 'if' statement:
-1. Check if the ball is beyond the left or right side of the
-   window
-2. If true, reverse the x-direction that the ball is moving
+If check_full returns true, break the loop
 
----------------------------------------------------------------
+Print “Board is full.” before the program ends
 
-## Task 8: Bounding box + ball bounce
-**Task 8a: player 1**
-Create a bounding box for player 1's paddle and use it to
-interact with the ball. The ball must reverse the x-direction
-that it is travelling if touching paddle 1.
+## Task 4: Switch Symbol
+1. Create a function named switch_symbol
+- Change the symbol being set from “X” to “O” and vice versa
+2. The function takes in 1 parameter, current_symbol
+3. If current_symbol is “X”, return “O”, and vice versa
+4. Initialize the current_symbol to “X”
+5. Call the function in the main loop to reassign the current_symbol after each input
+6. Modify the get_player_move function to take another parameter, current_symbol
+7. Use current_symbol as the value set in the board
 
-**Task 8b: player 2**
-Create a bounding box for player 2's paddle and use it to
-interact with the ball. The ball must reverse the x-direction
-that it is travelling if touching paddle 2.
+## Task 5a: Checking for Win Conditions
+Let’s start by first creating a ‘WIN_CONDITIONS’ constant nested list that holds each of the following as a separate item:
+1. All possible horizontal winning conditions
+2. All possible vertical winning conditions
+3. All possible diagonal winning conditions
 
----------------------------------------------------------------
+There should be 8 items in total.
 
-## Task 9: Image as a background
-Using 'screen.blit()' and the uploaded 'Grass Court' jpeg image,
-replace the black background with an image of a tennis court.
+## Task 5b: Checking for Win Conditions
+### ‘check_win’ function
+Create a ‘check_win’ function with 1 parameter, ‘board’. This function must:
+1. use the ‘WIN_CONDITIONS’ list you have created earlier
+2. loop through each winning condition to check if:
+- cell 1 == cell 2 == cell 3, and
+- cell 1 != space (‘ ‘)
+- return True if the above condition is met. Else, return False.
 
----------------------------------------------------------------
+### Main game loop
+Modify your main game loop to:
+1. Use the ‘check_win’ function to break the loop if there is a win.
+2. Print the board and print ‘{current_symbol} wins!’ if there is a win.
 
-## Task 10: Image as a sprite (ball)
-By loading and drawing the uploaded 'Tennis Ball.png', replace
-the white ball with the image of a tennis ball provided.
+# Lesson 15 - Tic Tac Toe Part 3/3
 
----------------------------------------------------------------
+## Task 1: Record Click Position
+This function will convert the mouse pointer’s x and y coordinates in the window to rows and columns on the board.
+Each square is CELL_SIZE so dividing the mouse coordinate by CELL_SIZE gives us the row and column.
 
-## Task 11: Image as a sprite (racket)
-**Task 11a: racket 1**
-By loading and drawing the uploaded 'Tennis Racket.png',
-replace player 1's white paddle with the image of the tennis
-racket provided.
+For example:
+- col = 400 // 266 = 1
+- row = (800 – 150) // 266 = 2
 
-**Task 11b: racket 2**
-By loading and drawing the uploaded 'Tennis Racket.png',
-replace player 2's white paddle with the image of the tennis
-racket provided.
+## Task 2a: Wait for Click
+1. Create a function, wait_for_click
+2. The function uses the global clicked_row and clicked_col variables
+3. Set clicked_row and clicked_col to None
+4. Use Turtle’s onclick function to call record_click_position
 
-Player 2's racket must be rotated 180 degrees.
+## Task 2b: Wait for Click
+1. Wait until a mouse click is detected using a while loop
+- clicked_row and clicked_col is None when no clicks are detected
+- Call turtle.update() to allow mouse clicks to be detected
+2. Set screen.onclick(None) to stop detecting clicks
+3. Return clicked_row and clicked_col values
 
----------------------------------------------------------------
+## Task 3a: Get Player Move (Turtle)
+1. Create a function, get_player_move_turtle
+- The function takes 2 parameters, ‘board’ and ‘current_symbol’
+2. In a while loop, 
+- call the wait_for_click function and 
+- create 2 variables to receive the return values, ‘row’ and ‘col’
+3. Check if board[row][col] is empty, if it is:
+- Use row, col, and current_symbol to set the symbol in the board
+- Use row, col, and current_symbol and pass the values to the draw_symbol function as its parameters
+- Break out of the loop
 
-## Task 12: Goal detection and score keeping
-Create the following variables to keep track of each player's
-score:
-1. player1_score
-2. player2_score
+## Task 3b: Update Main Loop
+Update the main code with the new functions and initialize the clicked_row and clicked_col global variables to be used by the functions.
 
-In your game loop, modify the code that previously detects if
-the ball is too far to the left/right of the screen to:
-1. Award the respective player a point depending on which side
-   of the window the ball meets.
-2. Announce in the console the player's latest score.
+## Task 4a: Display Messages
+1. Create a function named, display_message
+- It should take 1 parameter, ‘message’
 
----------------------------------------------------------------
+2. Set the pen to go to the middle of the board
 
-## Task 13: Drawing score on screen
-**Task 13a: player 1**
-Display player 1's score on the top-left corner of the screen.
+3. Use the pen.write() function to display the ‘message’ in the window
 
-**Task 13b: player 2**
-Display player 2's score on the top-right corner of the screen.
-
----------------------------------------------------------------
-
-## Task 14: Announcing winner
-Modify your code to:
-1. Define a bigger font to be used when announcing winner
-2. Render "Player 1 wins!" and "Player 2 wins!" texts
-3. Announce the winner by displaying the relevant text in the
-   centre of the screen when one player reaches 3 points
-
----------------------------------------------------------------
-
-## Task 15: Ending the game after displaying winner
-Modify your code to end the game 3 seconds after announcing
-the winner.
-
----------------------------------------------------------------
-
-## Task 16: Reset ball position after a score
-Modify your code to bring the ball back to the centre of the
-screen each time a player scores.
-
----------------------------------------------------------------
-
-## Task 17: Game pause after reset
-Modify your code to add a 3 seconds pause to the game each time
-a player scores and the ball resets.
+## Task 4b: Update Main Loop
+Update the main loop to call display_message
+- Display the winner if there is one, e.g. “Player X wins!”
+- Else display “It’s a draw!”
